@@ -8,8 +8,7 @@ RUN gradle build --no-daemon
 FROM openjdk:8-jdk-alpine
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
-# Copy the .env file to the root of the container's filesystem
-COPY .env /app/.env
+
 
 # Run the application
 EXPOSE 8080
