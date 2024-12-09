@@ -17,8 +17,12 @@ import java.util.Date;
 @Component
 public class JwtLogoutHandler implements LogoutHandler {
 
-    private static final Dotenv dotenv = Dotenv.load();
-    private final String SIGNER_KEY = dotenv.get("JWT_SIGNER_KEY");
+    //for local
+//    private static final Dotenv dotenv = Dotenv.load();
+//    private final String SIGNER_KEY = dotenv.get("JWT_SIGNER_KEY");
+
+    @Value("${api_signer_key}")
+    private String SIGNER_KEY;
 
     private final InvalidTokenRepository invalidTokenRepository;
 

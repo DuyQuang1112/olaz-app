@@ -4,6 +4,7 @@ import com.myproject.repository.InvalidTokenRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -17,8 +18,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtValidationFilter extends OncePerRequestFilter {
 
-    private static final Dotenv dotenv = Dotenv.load();
-    private final String SIGNER_KEY = dotenv.get("JWT_SIGNER_KEY");
+//    private static final Dotenv dotenv = Dotenv.load();
+//    private final String SIGNER_KEY = dotenv.get("JWT_SIGNER_KEY");
+
+    @Value("${api_signer_key}")
+    private String SIGNER_KEY;
 
     private final InvalidTokenRepository invalidTokenRepository;
 

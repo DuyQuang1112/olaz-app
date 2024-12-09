@@ -4,6 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -14,9 +15,12 @@ import java.util.UUID;
 @Component
 public class JwtTokenProvider {
 
-    private static final Dotenv dotenv = Dotenv.load();
-    private final String SIGNER_KEY = dotenv.get("API_SIGNER_KEY");
+    // for local
+//    private static final Dotenv dotenv = Dotenv.load();
+//    private final String SIGNER_KEY = dotenv.get("API_SIGNER_KEY");
 
+    @Value("${api_signer_key}")
+    private String SIGNER_KEY;
 
     public String generateToken(CustomUserDetails customUserDetails) {
         SecretKey key = Keys.hmacShaKeyFor(SIGNER_KEY.getBytes());
